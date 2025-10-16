@@ -7,6 +7,10 @@ android {
     namespace = "com.example.newassignment"
     compileSdk {
         version = release(36)
+
+        buildFeatures {
+            viewBinding = true
+        }
     }
 
     defaultConfig {

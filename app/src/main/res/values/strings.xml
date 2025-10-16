@@ -1,5 +1,12 @@
 <resources>
-    <string name="app_name">NewAssignment</string>
-    <string name="button_addDiary">Add Placemark</string>
+
+
+    <string name="app_name">NewAssignmnet</string>
+    <string name="button_addDiary">Add Diary</string>
+    <string name="button_deleteDiary">Delete Diary</string>
+    <string name="button_updateDiary">Update Diary</string>
+    <string name="hint_diaryTitle">Diary Title</string>
+
+
 
 </resources>
