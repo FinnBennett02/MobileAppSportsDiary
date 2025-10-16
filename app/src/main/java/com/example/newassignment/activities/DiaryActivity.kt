@@ -22,8 +22,6 @@ class DiaryActivity : AppCompatActivity() {
         binding = ActivityDiaryBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        Timber.Forest.plant(Timber.DebugTree())
-        Timber.Forest.i("Diary Activity started..")
 
 
         binding.btnDelete.setOnClickListener() {
