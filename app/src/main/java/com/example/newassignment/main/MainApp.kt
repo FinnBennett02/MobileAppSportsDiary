@@ -13,8 +13,7 @@ class MainApp : Application() {
         super.onCreate()
         Timber.plant(Timber.DebugTree())
         i("Placemark started")
-        diaries.add(DiaryModel("One", "About one..."))
-        diaries.add(DiaryModel("Two", "About two..."))
+
 
     }
 }
