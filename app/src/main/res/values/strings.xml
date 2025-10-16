@@ -6,6 +6,9 @@
     <string name="button_deleteDiary">Delete Diary</string>
     <string name="button_updateDiary">Update Diary</string>
     <string name="hint_diaryTitle">Diary Title</string>
+    <string name="hint_diaryDescription">Description of match/training </string>
+
+
 
 
 
