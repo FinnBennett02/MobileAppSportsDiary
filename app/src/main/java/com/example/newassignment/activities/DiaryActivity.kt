@@ -29,7 +29,7 @@ class DiaryActivity : AppCompatActivity() {
             diary.title = binding.diaryEntryTitle.text.toString()
             diary.description = binding.description.text.toString()
             if (diary.title.isNotEmpty()) {
-                app.diaries.add(diary.copy())
+                app.diaries.create(diary.copy())
                 setResult(RESULT_OK)
                 finish()
             }
