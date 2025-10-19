@@ -4,13 +4,13 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.IntentCompat
 import com.example.newassignment.databinding.ActivityDiaryBinding
 import com.example.newassignment.main.MainApp
 import com.example.newassignment.models.DiaryModel
 import com.google.android.material.snackbar.Snackbar
 import com.example.newassignment.R
-import timber.log.Timber
-import timber.log.Timber.Forest.i
+
 
 class DiaryActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDiaryBinding
@@ -25,6 +25,17 @@ class DiaryActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbarAdd)
         app = application as MainApp
 
+
+        if (intent.hasExtra("diary_edit")) {
+            val receivedDiary = IntentCompat.getParcelableExtra(intent, "diary_edit", DiaryModel::class.java)
+            if (receivedDiary != null) {
+                diary = receivedDiary
+                binding.diaryEntryTitle.setText(diary.title)
+                binding.description.setText(diary.description)
+            }
+        }
+
+
         binding.btnAdd.setOnClickListener() {
             diary.title = binding.diaryEntryTitle.text.toString()
             diary.description = binding.description.text.toString()
@@ -34,7 +45,7 @@ class DiaryActivity : AppCompatActivity() {
                 finish()
             }
             else {
-                Snackbar.make(it,"Please Enter a title", Snackbar.LENGTH_LONG)
+                Snackbar.make(it,getString(R.string.no_title), Snackbar.LENGTH_LONG)
                     .show()
             }
         }

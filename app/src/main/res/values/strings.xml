@@ -9,6 +9,8 @@
     <string name="hint_diaryDescription">Description of match/training </string>
     <string name="menu_addDiary">Add</string>
     <string name="menu_cancelDiary">Cancel</string>
+    <string name="no_title">Please enter a title</string>
+
 
 
 

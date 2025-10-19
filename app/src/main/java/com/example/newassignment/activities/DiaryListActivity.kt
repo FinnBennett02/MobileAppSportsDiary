@@ -64,6 +64,7 @@ class DiaryListActivity : AppCompatActivity(), DiaryListener {
 
     override fun onDiaryClick(diary: DiaryModel) {
         val launcherIntent = Intent(this, DiaryActivity::class.java)
+        launcherIntent.putExtra("diary_edit", diary)
         getClickResult.launch(launcherIntent)
     }
 

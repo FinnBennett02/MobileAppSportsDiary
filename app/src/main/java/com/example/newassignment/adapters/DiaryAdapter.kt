@@ -10,30 +10,31 @@ interface DiaryListener {
     fun onDiaryClick(diary: DiaryModel)
 }
 
-class DiaryAdapter (private var diaries: List<DiaryModel>, private val listener: DiaryListener) :
+// Mark 'listener' as private since it's only used within this class
+class DiaryAdapter(private var diaries: List<DiaryModel>, private val listener: DiaryListener) :
     RecyclerView.Adapter<DiaryAdapter.MainHolder>() {
 
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainHolder {
-            val binding = CardDiaryBinding
-                .inflate(LayoutInflater.from(parent.context), parent, false)
-            return MainHolder(binding)
-        }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainHolder {
+        val binding = CardDiaryBinding
+            .inflate(LayoutInflater.from(parent.context), parent, false)
+        // Pass the listener to the MainHolder constructor
+        return MainHolder(binding, listener)
+    }
 
-        override fun onBindViewHolder(holder: MainHolder, position: Int) {
-            val diary = diaries[holder.adapterPosition]
-            holder.bind(diary)
-        }
+    override fun onBindViewHolder(holder: MainHolder, position: Int) {
+        val diary = diaries[holder.adapterPosition]
+        holder.bind(diary)
+    }
 
-        override fun getItemCount(): Int = diaries.size
+    override fun getItemCount(): Int = diaries.size
 
-        class MainHolder(private val binding : CardDiaryBinding) :
-            RecyclerView.ViewHolder(binding.root) {
+    class MainHolder(private val binding: CardDiaryBinding, private val listener: DiaryListener) :
+        RecyclerView.ViewHolder(binding.root) {
 
-            fun bind(diary: DiaryModel) {
-                binding.placemarkTitle.text = diary.title
-                binding.description.text = diary.description
-                binding.root.setOnClickListener { listener.onDiaryClick(diary) }
-            }
-            }
+        fun bind(diary: DiaryModel) {
+            binding.placemarkTitle.text = diary.title
+            binding.description.text = diary.description
+            binding.root.setOnClickListener { listener.onDiaryClick(diary) }
         }
     }
+}
