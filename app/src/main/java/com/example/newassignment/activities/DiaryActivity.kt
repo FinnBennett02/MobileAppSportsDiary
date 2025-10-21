@@ -56,6 +56,14 @@ class DiaryActivity : AppCompatActivity() {
                 finish()
             }
         }
+        binding.btnDelete.setOnClickListener {
+            app.diaries.delete(diary.id.toString())
+            Snackbar.make(it, getString(R.string.delete_diary), Snackbar.LENGTH_LONG)
+                .show()
+            setResult(RESULT_OK)
+            finish()
+
+        }
         }
 
             override fun onCreateOptionsMenu(menu: Menu): Boolean {
