@@ -10,8 +10,10 @@ interface DiaryListener {
     fun onDiaryClick(diary: DiaryModel)
 }
 
-// Mark 'listener' as private since it's only used within this class
-class DiaryAdapter(private var diaries: List<DiaryModel>, private val listener: DiaryListener) :
+
+class DiaryAdapter(
+    private var diaries: List<DiaryModel>,
+    private val listener: DiaryListener) :
     RecyclerView.Adapter<DiaryAdapter.MainHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainHolder {
@@ -27,6 +29,11 @@ class DiaryAdapter(private var diaries: List<DiaryModel>, private val listener: 
     }
 
     override fun getItemCount(): Int = diaries.size
+
+    fun updateDiaryEnts( diaries: List<DiaryModel>){
+        this.diaries = diaries
+        notifyDataSetChanged()
+    }
 
     class MainHolder(private val binding: CardDiaryBinding, private val listener: DiaryListener) :
         RecyclerView.ViewHolder(binding.root) {
