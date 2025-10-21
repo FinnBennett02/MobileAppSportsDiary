@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.newassignment.databinding.CardDiaryBinding
 import com.example.newassignment.models.DiaryModel
+import kotlin.toString
 
 interface DiaryListener {
     fun onDiaryClick(diary: DiaryModel)
@@ -34,6 +35,9 @@ class DiaryAdapter(private var diaries: List<DiaryModel>, private val listener: 
         fun bind(diary: DiaryModel) {
             binding.placemarkTitle.text = diary.title
             binding.description.text = diary.description
+            binding.goals.text = "Goals: ${diary.goals}"
+            binding.assists.text = "Assists: ${diary.assist}"
+            binding.rating.text = "Rating: ${diary.rating}"
             binding.root.setOnClickListener { listener.onDiaryClick(diary) }
         }
     }

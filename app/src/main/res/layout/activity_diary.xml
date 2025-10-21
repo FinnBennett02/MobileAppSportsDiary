@@ -82,6 +82,60 @@
                     android:textSize="16sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
+            <!-- Score Input -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                app:boxBackgroundMode="outline"
+                app:boxStrokeColor="@color/colorAccent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/goals"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="No. of Goals"
+                    android:inputType="number"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="16sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Score Input -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                app:boxBackgroundMode="outline"
+                app:boxStrokeColor="@color/colorAccent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/assit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="No. of assist"
+                    android:inputType="number"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="16sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Personal Rating -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Your Rating (1–10)"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="16sp"
+                android:layout_marginBottom="8dp" />
+
+            <RatingBar
+                android:id="@+id/ratingBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:numStars="10"
+                android:stepSize="1"
+                android:rating="5"
+                android:layout_marginBottom="24dp" />
+
             <!-- Action Buttons -->
             <LinearLayout
                 android:layout_width="match_parent"
