@@ -1,5 +1,6 @@
 package com.example.newassignment.models
 
+import android.content.Context
 import timber.log.Timber.Forest.i
 
 var lastId =0L
@@ -10,7 +11,7 @@ internal fun getId(): Long {
 
 
 
-class DiaryMemStore : DiaryStore {
+class DiaryMemStore(private val context: Context) : DiaryStore {
     val diaries = ArrayList<DiaryModel>()
 
     override fun findAll(): List<DiaryModel> {

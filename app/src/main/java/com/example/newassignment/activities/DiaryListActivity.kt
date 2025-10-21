@@ -15,6 +15,7 @@ import com.example.newassignment.adapters.DiaryListener
 import com.example.newassignment.databinding.ActivityDiaryListBinding
 import com.example.newassignment.main.MainApp
 import com.example.newassignment.models.DiaryModel
+import com.example.newassignment.models.DiaryStorage
 
 class DiaryListActivity : AppCompatActivity(), DiaryListener {
 
@@ -26,6 +27,7 @@ class DiaryListActivity : AppCompatActivity(), DiaryListener {
         super.onCreate(savedInstanceState)
         binding = ActivityDiaryListBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        diaries = DiaryStorage.loadDiaries(this)
         app = application as MainApp
 
         val layoutManager = LinearLayoutManager(this)
