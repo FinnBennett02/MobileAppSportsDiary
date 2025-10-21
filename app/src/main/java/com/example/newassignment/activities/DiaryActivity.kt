@@ -16,6 +16,7 @@ class DiaryActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDiaryBinding
     var diary = DiaryModel()
     lateinit var app: MainApp
+    var edit = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,11 +28,14 @@ class DiaryActivity : AppCompatActivity() {
 
 
         if (intent.hasExtra("diary_edit")) {
-            val receivedDiary = IntentCompat.getParcelableExtra(intent, "diary_edit", DiaryModel::class.java)
+            val receivedDiary =
+                IntentCompat.getParcelableExtra(intent, "diary_edit", DiaryModel::class.java)
             if (receivedDiary != null) {
+                edit = true
                 diary = receivedDiary
                 binding.diaryEntryTitle.setText(diary.title)
                 binding.description.setText(diary.description)
+                binding.btnAdd.setText(R.string.save_diary)
             }
         }
 
@@ -39,27 +43,31 @@ class DiaryActivity : AppCompatActivity() {
         binding.btnAdd.setOnClickListener() {
             diary.title = binding.diaryEntryTitle.text.toString()
             diary.description = binding.description.text.toString()
-            if (diary.title.isNotEmpty()) {
-                app.diaries.create(diary.copy())
+            if (diary.title.isEmpty()) {
+                Snackbar.make(it, getString(R.string.no_title), Snackbar.LENGTH_LONG)
+                    .show()
+            } else {
+                if (edit) {
+                    app.diaries.update(diary.copy())
+                } else {
+                    app.diaries.create(diary.copy())
+                }
                 setResult(RESULT_OK)
                 finish()
             }
-            else {
-                Snackbar.make(it,getString(R.string.no_title), Snackbar.LENGTH_LONG)
-                    .show()
+        }
+        }
+
+            override fun onCreateOptionsMenu(menu: Menu): Boolean {
+                menuInflater.inflate(R.menu.menu_diary, menu)
+                return super.onCreateOptionsMenu(menu)
+            }
+
+            override fun onOptionsItemSelected(item: MenuItem): Boolean {
+                when (item.itemId) {
+                    R.id.item_cancel -> { finish() }
+                }
+                return super.onOptionsItemSelected(item)
             }
         }
-    }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.menu_diary, menu)
-        return super.onCreateOptionsMenu(menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.item_cancel -> { finish() }
-        }
-        return super.onOptionsItemSelected(item)
-    }
-}

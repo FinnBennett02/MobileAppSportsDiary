@@ -1,7 +1,7 @@
 <resources>
 
 
-    <string name="app_name">NewAssignmnet</string>
+    <string name="app_name">Sports Diary</string>
     <string name="button_addDiary">Add Diary</string>
     <string name="button_deleteDiary">Delete Diary</string>
     <string name="button_updateDiary">Update Diary</string>
@@ -10,6 +10,8 @@
     <string name="menu_addDiary">Add</string>
     <string name="menu_cancelDiary">Cancel</string>
     <string name="no_title">Please enter a title</string>
+    <string name="save_diary"> Save diary Entry </string>
+
 
 
 

@@ -7,23 +7,27 @@
     android:layout_height="match_parent"
     tools:context=".activities.DiaryActivity">
 
+    <!-- App Bar -->
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorAccent"
         android:fitsSystemWindows="true"
-        app:elevation="0dip"
+        app:elevation="4dp"
         app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbarAdd"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:titleTextColor="@color/colorPrimary" />
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:titleTextColor="@android:color/white"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
     </com.google.android.material.appbar.AppBarLayout>
 
+    <!-- Scrollable Content -->
     <ScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -36,75 +40,79 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="16dp">
 
-            <EditText
-                android:id="@+id/diaryEntryTitle"
+            <!-- Title Input -->
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:autofillHints="hint"
-                android:hint="@string/hint_diaryTitle"
-                android:inputType="text"
-                android:maxLength="25"
-                android:maxLines="1"
-                android:padding="8dp"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="16sp" />
+                android:layout_marginBottom="12dp"
+                app:boxBackgroundMode="outline"
+                app:boxStrokeColor="@color/colorAccent">
 
-            <EditText
-                android:id="@+id/description"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/diaryEntryTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/hint_diaryTitle"
+                    android:maxLength="25"
+                    android:inputType="text"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="16sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Description Input -->
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:autofillHints="hint"
-                android:hint="@string/hint_diaryDescription"
-                android:inputType="text"
-                android:maxLength="25"
-                android:maxLines="1"
-                android:padding="8dp"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="16sp" />
+                android:layout_marginBottom="24dp"
+                app:boxBackgroundMode="outline"
+                app:boxStrokeColor="@color/colorAccent">
 
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/hint_diaryDescription"
+                    android:maxLength="250"
+                    android:inputType="textMultiLine"
+                    android:minLines="4"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="16sp" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <Button
-                android:id="@+id/btnAdd"
-                android:layout_width="113dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="16dp"
-                android:background="@color/colorAccent"
-                android:paddingTop="8dp"
-                android:paddingBottom="8dp"
-                android:stateListAnimator="@null"
-                android:text="@string/button_addDiary"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="20sp" />
-
-            <Button
-                android:id="@+id/btnUpdate"
-                android:layout_width="115dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="16dp"
-                android:background="@color/colorAccent"
-                android:paddingTop="8dp"
-                android:paddingBottom="8dp"
-                android:stateListAnimator="@null"
-                android:text="@string/button_updateDiary"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="20sp" />
-
-            <Button
-                android:id="@+id/btnDelete"
+            <!-- Action Buttons -->
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="16dp"
-                android:background="@color/colorAccent"
-                android:paddingTop="8dp"
-                android:paddingBottom="8dp"
-                android:stateListAnimator="@null"
-                android:text="@string/button_deleteDiary"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="20sp" />
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginBottom="16dp"
+                android:weightSum="2">
+
+                <Button
+                    android:id="@+id/btnAdd"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="8dp"
+                    android:backgroundTint="@color/colorAccent"
+                    android:text="@string/button_addDiary"
+                    android:textColor="@android:color/white"
+                    android:textSize="18sp" />
+
+                <Button
+                    android:id="@+id/btnDelete"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="8dp"
+                    android:backgroundTint="@color/colorAccent"
+                    android:text="@string/button_deleteDiary"
+                    android:textColor="@android:color/white"
+                    android:textSize="18sp" />
+            </LinearLayout>
 
         </LinearLayout>
     </ScrollView>
