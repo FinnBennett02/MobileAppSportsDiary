@@ -11,6 +11,7 @@
     <string name="menu_cancelDiary">Cancel</string>
     <string name="no_title">Please enter a title</string>
     <string name="save_diary"> Save diary Entry </string>
+    <string name="delete_diary"> Delete diary Entry </string>
 
 
 

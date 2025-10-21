@@ -29,7 +29,11 @@ class DiaryMemStore : DiaryStore {
             foundDiary.description = diary.description
             logAll()
         }
+    }
 
+    override fun delete(id: String) {
+        diaries.removeIf { p -> p.id.toString() == id }
+        logAll()
 
     }
 

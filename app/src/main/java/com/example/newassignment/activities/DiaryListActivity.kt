@@ -32,15 +32,16 @@ class DiaryListActivity : AppCompatActivity(), DiaryListener {
 
         val layoutManager = LinearLayoutManager(this)
         binding.recyclerView.layoutManager = layoutManager
-        binding.recyclerView.adapter = DiaryAdapter(app.diaries.findAll(),this)
-
+        binding.recyclerView.adapter = DiaryAdapter(app.diaries.findAll(), this)
 
 
     }
+
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
         return super.onCreateOptionsMenu(menu)
     }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.item_add -> {
@@ -57,8 +58,10 @@ class DiaryListActivity : AppCompatActivity(), DiaryListener {
             ActivityResultContracts.StartActivityForResult()
         ) {
             if (it.resultCode == Activity.RESULT_OK) {
-                (binding.recyclerView.adapter)?.
-                notifyItemRangeChanged(0,app.diaries.findAll().size)
+                (binding.recyclerView.adapter)?.notifyItemRangeChanged(
+                    0,
+                    app.diaries.findAll().size
+                )
             }
         }
 
@@ -73,13 +76,12 @@ class DiaryListActivity : AppCompatActivity(), DiaryListener {
             ActivityResultContracts.StartActivityForResult()
         ) {
             if (it.resultCode == RESULT_OK) {
-                (binding.recyclerView.adapter)?.
-                notifyItemRangeChanged(0,app.diaries.findAll().size)
+                (binding.recyclerView.adapter)?.notifyDataSetChanged()
             }
         }
-
-
-
-
 }
+
+
+
+
 
