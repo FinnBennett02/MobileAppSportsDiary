@@ -7,6 +7,7 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.newassignment.R
 import com.example.newassignment.adapters.DiaryAdapter
@@ -19,23 +20,38 @@ class DiaryListActivity : AppCompatActivity(), DiaryListener {
 
     lateinit var app: MainApp
     private lateinit var binding: ActivityDiaryListBinding
+    private lateinit var adapter: DiaryAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDiaryListBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        binding.toolbar.title = title
-        setSupportActionBar(binding.toolbar)
-
-
         app = application as MainApp
 
         val layoutManager = LinearLayoutManager(this)
         binding.recyclerView.layoutManager = layoutManager
-        binding.recyclerView.adapter = DiaryAdapter(app.diaries.findAll(), this)
 
 
+        adapter = DiaryAdapter(app.diaries.findAll(), this)
+
+
+        binding.recyclerView.adapter = adapter
+
+
+        binding.editText.addTextChangedListener { diaryFilter ->
+            val filteredDiaries = app.diaries.findAll().filter { diary ->
+                diary.title.lowercase().contains(diaryFilter.toString().lowercase())
+            }
+            adapter.updateDiaryEnts(filteredDiaries)
+        }
+
+
+
+        binding.toolbar.title = title
+        setSupportActionBar(binding.toolbar)
     }
+
+
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
@@ -50,7 +66,6 @@ class DiaryListActivity : AppCompatActivity(), DiaryListener {
             }
         }
         return super.onOptionsItemSelected(item)
-
     }
 
     private val getResult =
@@ -58,10 +73,8 @@ class DiaryListActivity : AppCompatActivity(), DiaryListener {
             ActivityResultContracts.StartActivityForResult()
         ) {
             if (it.resultCode == Activity.RESULT_OK) {
-                (binding.recyclerView.adapter)?.notifyItemRangeChanged(
-                    0,
-                    app.diaries.findAll().size
-                )
+                adapter.updateDiaryEnts(app.diaries.findAll())
+                binding.editText.text.clear()
             }
         }
 
@@ -76,12 +89,9 @@ class DiaryListActivity : AppCompatActivity(), DiaryListener {
             ActivityResultContracts.StartActivityForResult()
         ) {
             if (it.resultCode == RESULT_OK) {
-                (binding.recyclerView.adapter)?.notifyDataSetChanged()
+                // Also refresh correctly here
+                adapter.updateDiaryEnts(app.diaries.findAll())
+                binding.editText.text.clear()
             }
         }
 }
-
-
-
-
-
