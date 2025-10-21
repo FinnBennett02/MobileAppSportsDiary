@@ -27,6 +27,9 @@ class DiaryMemStore : DiaryStore {
         if (foundDiary != null) {
             foundDiary.title = diary.title
             foundDiary.description = diary.description
+            foundDiary.goals = diary.goals
+            foundDiary.assist = diary.assist
+            foundDiary.rating = diary.rating
             logAll()
         }
     }

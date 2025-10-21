@@ -35,6 +35,8 @@ class DiaryActivity : AppCompatActivity() {
                 diary = receivedDiary
                 binding.diaryEntryTitle.setText(diary.title)
                 binding.description.setText(diary.description)
+                binding.goals.text.toString().toLongOrNull()?: 0L
+                binding.assit.text.toString().toLongOrNull()?: 0L
                 binding.btnAdd.setText(R.string.save_diary)
             }
         }
@@ -43,6 +45,11 @@ class DiaryActivity : AppCompatActivity() {
         binding.btnAdd.setOnClickListener() {
             diary.title = binding.diaryEntryTitle.text.toString()
             diary.description = binding.description.text.toString()
+            diary.goals = binding.goals.text.toString().toLongOrNull()?: 0L
+            diary.assist = binding.assit.text.toString().toLongOrNull()?: 0L
+            diary.rating = binding.ratingBar.rating.toInt()
+
+
             if (diary.title.isEmpty()) {
                 Snackbar.make(it, getString(R.string.no_title), Snackbar.LENGTH_LONG)
                     .show()
