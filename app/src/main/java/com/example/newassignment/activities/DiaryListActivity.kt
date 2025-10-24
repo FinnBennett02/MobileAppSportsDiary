@@ -27,7 +27,6 @@ class DiaryListActivity : AppCompatActivity(), DiaryListener {
         super.onCreate(savedInstanceState)
         binding = ActivityDiaryListBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        diaries = DiaryStorage.loadDiaries(this)
         app = application as MainApp
 
         val layoutManager = LinearLayoutManager(this)
