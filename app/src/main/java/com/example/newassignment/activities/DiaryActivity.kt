@@ -14,6 +14,7 @@ import com.example.newassignment.databinding.ActivityDiaryBinding
 import com.example.newassignment.helpers.showImagePicker
 import com.example.newassignment.main.MainApp
 import com.example.newassignment.models.DiaryModel
+import com.example.newassignment.models.Location
 import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
 import timber.log.Timber.Forest.i
@@ -21,11 +22,15 @@ import timber.log.Timber.Forest.i
 class DiaryActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityDiaryBinding
+    private lateinit var mapIntentLauncher : ActivityResultLauncher<Intent>
+
     private lateinit var imageIntentLauncher: ActivityResultLauncher<Intent>
 
     private var diary = DiaryModel()
     private lateinit var app: MainApp
     private var edit = false
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,6 +43,8 @@ class DiaryActivity : AppCompatActivity() {
         app = application as MainApp
 
         registerImagePickerCallback()
+        registerMapCallback()
+
 
         binding.chooseImage.setOnClickListener {
             showImagePicker(imageIntentLauncher)
@@ -94,6 +101,22 @@ class DiaryActivity : AppCompatActivity() {
             setResult(RESULT_OK)
             finish()
         }
+
+        binding.placemarkLocation.setOnClickListener {
+            val location = Location(52.245696, -7.139102, 15f)
+            if (diary.zoom != 0f) {
+                location.lat =  diary.lat
+                location.lng = diary.lng
+                location.zoom = diary.zoom
+            }
+            val launcherIntent = Intent(this, MapActivity::class.java)
+                .putExtra("location", location)
+            mapIntentLauncher.launch(launcherIntent)
+        }
+
+
+
+
     }
 
     private fun registerImagePickerCallback() {
@@ -111,6 +134,30 @@ class DiaryActivity : AppCompatActivity() {
                 }
             }
     }
+
+
+    private fun registerMapCallback() {
+        mapIntentLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult())
+            { result ->
+                when (result.resultCode) {
+                    RESULT_OK -> {
+                        if (result.data != null) {
+                            i("Got Location ${result.data.toString()}")
+                            val location = result.data!!.extras?.getParcelable<Location>("location")!!
+                            i("Location == $location")
+                            diary.lat = location.lat
+                            diary.lng = location.lng
+                            diary.zoom = location.zoom
+                        } // end of if
+                    }
+                    RESULT_CANCELED -> { } else -> { }
+                }
+            }
+    }
+
+
+
 
 
 

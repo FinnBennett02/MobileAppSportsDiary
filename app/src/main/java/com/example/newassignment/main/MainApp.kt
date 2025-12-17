@@ -15,10 +15,7 @@ class MainApp : Application() {
     override fun onCreate() {
         super.onCreate()
         Timber.plant(Timber.DebugTree())
-
-        // Initialize diaries here, where the context is fully available
         diaries = DiaryMemStore(applicationContext)
-
         i("Diary App started")
     }
 }

@@ -11,22 +11,37 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.NewAssignment">
-        <activity android:name=".activities.DiaryListActivity"
+        android:theme="@style/Theme.NewAssignment"
+        tools:targetApi="34">
+
+        <!-- Google Maps API Key -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/MAPS_API_KEY" />
+
+        <!-- Map Activity -->
+        <activity
+            android:name=".activities.MapActivity"
+            android:exported="false"
+            android:label="@string/title_activity_maps" />
+
+        <!-- Diary List (Launcher Activity) -->
+        <activity
+            android:name=".activities.DiaryListActivity"
             android:exported="true">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 
-            <meta-data android:name="android.app.lib_name"
-                android:value="" />
         </activity>
-        <activity android:name=".activities.DiaryActivity">
-            <meta-data android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
+
+        <!-- Diary Add/Edit Activity -->
+        <activity
+            android:name=".activities.DiaryActivity"
+            android:exported="false" />
+
     </application>
+
 </manifest>
-
-
