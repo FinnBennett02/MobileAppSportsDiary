@@ -1,10 +1,14 @@
 package com.example.newassignment.adapters
 
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.newassignment.R
 import com.example.newassignment.databinding.CardDiaryBinding
 import com.example.newassignment.models.DiaryModel
+import com.squareup.picasso.Picasso
+
 import kotlin.toString
 
 interface DiaryListener {
@@ -45,6 +49,19 @@ class DiaryAdapter(
             binding.goals.text = "Goals: ${diary.goals}"
             binding.assists.text = "Assists: ${diary.assist}"
             binding.rating.text = "Rating: ${diary.rating}"
+
+            // ✅ Load image safely
+            if (diary.image.isNotEmpty()) {
+                Picasso.get()
+                    .load(Uri.parse(diary.image))
+                    .resize(200, 200)
+                    .centerCrop()
+                    .into(binding.imageIcon)
+            } else {
+                // Optional: placeholder if no image
+                binding.imageIcon.setImageResource(R.mipmap.ic_launcher)
+            }
+
             binding.root.setOnClickListener { listener.onDiaryClick(diary) }
         }
     }

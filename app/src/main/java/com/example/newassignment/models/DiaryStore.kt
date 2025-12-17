@@ -6,6 +6,7 @@ interface DiaryStore {
     fun update(diary: DiaryModel)
     fun delete(id: String)
 
+
 }
 
 

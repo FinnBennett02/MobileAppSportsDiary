@@ -82,7 +82,7 @@
                     android:textSize="16sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Score Input -->
+            <!-- Goals -->
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -100,7 +100,7 @@
                     android:textSize="16sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Score Input -->
+            <!-- Assists -->
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -112,13 +112,13 @@
                     android:id="@+id/assit"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="No. of assist"
+                    android:hint="No. of Assists"
                     android:inputType="number"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="16sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Personal Rating -->
+            <!-- Rating -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -136,37 +136,65 @@
                 android:rating="5"
                 android:layout_marginBottom="24dp" />
 
-            <!-- Action Buttons -->
+            <!-- Add / Delete Buttons -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
                 android:orientation="horizontal"
-                android:gravity="center"
-                android:layout_marginBottom="16dp"
                 android:weightSum="2">
 
                 <Button
                     android:id="@+id/btnAdd"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:layout_marginEnd="8dp"
+                    android:layout_weight="1"
                     android:backgroundTint="@color/colorAccent"
                     android:text="@string/button_addDiary"
                     android:textColor="@android:color/white"
-                    android:textSize="18sp" />
+                    android:textSize="16sp" />
 
                 <Button
                     android:id="@+id/btnDelete"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:layout_marginStart="8dp"
+                    android:layout_weight="1"
                     android:backgroundTint="@color/colorAccent"
                     android:text="@string/button_deleteDiary"
                     android:textColor="@android:color/white"
-                    android:textSize="18sp" />
+                    android:textSize="16sp" />
             </LinearLayout>
+
+            <!-- Choose Image Button -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/chooseImage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:text="@string/button_addImage"
+                android:textSize="16sp"
+                app:cornerRadius="12dp"
+                app:strokeWidth="2dp"
+                app:strokeColor="@color/colorAccent"
+                app:backgroundTint="@android:color/transparent"
+                android:textColor="@color/colorAccent" />
+
+            <!-- Image Preview -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="4dp">
+
+                <ImageView
+                    android:id="@+id/diaryImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    />
+            </com.google.android.material.card.MaterialCardView>
 
         </LinearLayout>
     </ScrollView>

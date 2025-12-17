@@ -12,6 +12,12 @@
     <string name="no_title">Please enter a title</string>
     <string name="save_diary"> Save diary Entry </string>
     <string name="delete_diary"> Delete diary Entry </string>
+    <string name="button_addImage"> Add Image </string>
+    <string name="select_diary_image">Select Diary image</string>
+    <string name="change_diary_image">Change Diary image</string>
+
+
+
 
 
 

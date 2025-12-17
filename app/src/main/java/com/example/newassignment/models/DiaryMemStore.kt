@@ -46,6 +46,7 @@ class DiaryMemStore(private val context: Context) : DiaryStore {
             foundDiary.goals = diary.goals
             foundDiary.assist = diary.assist
             foundDiary.rating = diary.rating
+            foundDiary.image = diary.image
             serialize() // Save changes
             logAll()
         }
