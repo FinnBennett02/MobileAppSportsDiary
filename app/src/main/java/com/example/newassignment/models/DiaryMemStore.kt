@@ -61,6 +61,12 @@ class DiaryMemStore(private val context: Context) : DiaryStore {
         logAll()
     }
 
+    override fun deleteAll() {
+        diaries.clear()
+        serialize() // Save changes
+        logAll()
+    }
+
     private fun serialize() {
         serializer.serialize(diaries)
     }

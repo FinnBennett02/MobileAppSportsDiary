@@ -5,6 +5,7 @@ interface DiaryStore {
     fun create(diary: DiaryModel)
     fun update(diary: DiaryModel)
     fun delete(id: String)
+    fun deleteAll()
 
 
 }

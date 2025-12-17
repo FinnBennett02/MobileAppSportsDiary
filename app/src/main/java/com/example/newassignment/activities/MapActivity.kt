@@ -46,17 +46,44 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback,  GoogleMap.OnMarker
 
     override fun onMapReady(googleMap: GoogleMap) {
         map = googleMap
+
         val loc = LatLng(location.lat, location.lng)
-        val options = MarkerOptions()
-            .title("Placemark")
-            .snippet("GPS : $loc")
-            .draggable(true)
-            .position(loc)
-        map.addMarker(options)
+
+        // Initial marker
+        map.addMarker(
+            MarkerOptions()
+                .title("Placemark")
+                .snippet("GPS : $loc")
+                .draggable(true)
+                .position(loc)
+        )
+
+        // Allow dragging
         map.setOnMarkerDragListener(this)
+
+        // Allow tapping to move marker
+        map.setOnMapClickListener { latLng ->
+            map.clear() // remove old marker
+            map.addMarker(
+                MarkerOptions()
+                    .position(latLng)
+                    .title("Placemark")
+                    .draggable(true)
+            )
+
+            // Update the location object so it gets returned
+            location.lat = latLng.latitude
+            location.lng = latLng.longitude
+            location.zoom = map.cameraPosition.zoom   // ⭐ important
+        }
+
+        // Allow clicking marker to show snippet
         map.setOnMarkerClickListener(this)
+
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, location.zoom))
     }
+
+
 
     override fun onMarkerDrag(p0: Marker) {  }
 
