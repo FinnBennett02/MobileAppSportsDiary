@@ -4,5 +4,9 @@
     <color name="colorPrimaryDark">#1565C0</color>
     <color name="colorAccent">#43A047</color>
     <color name="black">#000000</color>
-
+    <!-- Material 3 required colors -->
+    <color name="colorOnPrimary">#FFFFFF</color>
+    <color name="colorSecondary">#43A047</color>
+    <color name="colorOnSecondary">#FFFFFF</color>
 </resources>
+

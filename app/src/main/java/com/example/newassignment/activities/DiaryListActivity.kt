@@ -16,6 +16,9 @@ import com.example.newassignment.databinding.ActivityDiaryListBinding
 import com.example.newassignment.main.MainApp
 import com.example.newassignment.models.DiaryModel
 import com.example.newassignment.models.DiaryStorage
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.preference.PreferenceManager
+
 
 
 class DiaryListActivity : AppCompatActivity(), DiaryListener {
@@ -70,9 +73,13 @@ class DiaryListActivity : AppCompatActivity(), DiaryListener {
                 val launcherIntent = Intent(this, DiaryMapsActivity::class.java)
                 mapIntentLauncher.launch(launcherIntent)
             }
+            R.id.item_toggle_theme -> {
+                toggleTheme()
+            }
         }
         return super.onOptionsItemSelected(item)
     }
+
 
 
     private val getResult =
@@ -90,6 +97,36 @@ class DiaryListActivity : AppCompatActivity(), DiaryListener {
         launcherIntent.putExtra("diary_edit", diary)
         getClickResult.launch(launcherIntent)
     }
+
+    private fun toggleTheme() {
+        val prefs = PreferenceManager.getDefaultSharedPreferences(this)
+        val currentMode = AppCompatDelegate.getDefaultNightMode()
+
+        val newMode = if (currentMode == AppCompatDelegate.MODE_NIGHT_YES)
+            AppCompatDelegate.MODE_NIGHT_NO
+        else
+            AppCompatDelegate.MODE_NIGHT_YES
+
+        prefs.edit().putInt("theme_mode", newMode).apply()
+        AppCompatDelegate.setDefaultNightMode(newMode)
+
+        invalidateOptionsMenu()
+    }
+
+    override fun onPrepareOptionsMenu(menu: Menu): Boolean {
+        val item = menu.findItem(R.id.item_toggle_theme)
+        val mode = AppCompatDelegate.getDefaultNightMode()
+
+        if (mode == AppCompatDelegate.MODE_NIGHT_YES) {
+            item.setIcon(R.drawable.ic_light_mode)
+        } else {
+            item.setIcon(R.drawable.ic_dark_mode)
+        }
+        return super.onPrepareOptionsMenu(menu)
+    }
+
+
+
 
     private val getClickResult =
         registerForActivityResult(

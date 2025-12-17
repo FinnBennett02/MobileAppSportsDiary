@@ -14,10 +14,21 @@
         android:theme="@style/Theme.NewAssignment"
         tools:targetApi="34">
         <activity
+            android:name=".activities.SplashActivity"
+            android:exported="true"
+            android:theme="@style/Theme.NewAssignment.Splash">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
+
+        <activity
             android:name=".activities.DiaryMapsActivity"
             android:exported="false"
-            android:theme="@style/Theme.NewAssignment" />
-        <!-- Google Maps API Key -->
+            android:theme="@style/Theme.NewAssignment" /> <!-- Google Maps API Key -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/MAPS_API_KEY" /> <!-- Map Activity -->
@@ -28,15 +39,11 @@
         <activity
             android:name=".activities.DiaryListActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity> <!-- Diary Add/Edit Activity -->
         <activity
             android:name=".activities.DiaryActivity"
             android:exported="false" />
+
     </application>
 
 </manifest>

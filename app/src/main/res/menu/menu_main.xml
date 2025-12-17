@@ -13,4 +13,11 @@
         android:icon="@android:drawable/ic_menu_mapmode"
         android:title="map"
         app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/item_toggle_theme"
+        android:title="Theme"
+        android:icon="@drawable/ic_dark_mode"
+        app:showAsAction="always" />
+
 </menu>
