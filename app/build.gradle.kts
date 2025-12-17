@@ -56,9 +56,17 @@ dependencies {
     implementation(libs.gson)
     implementation(libs.play.services.maps)
     implementation(libs.androidx.cardview)
+    implementation(libs.androidx.navigation.fragment.ktx)
+    implementation(libs.androidx.navigation.ui.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     implementation(libs.picasso)
+    implementation("androidx.preference:preference-ktx:1.2.1")
+    implementation("androidx.compose.material3:material3:1.2.0")
+    implementation("androidx.core:core-splashscreen:1.0.1")
+
+
+
 
 }
