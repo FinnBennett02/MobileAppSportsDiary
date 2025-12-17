@@ -1,6 +1,7 @@
 package com.example.newassignment.activities
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
@@ -76,6 +77,20 @@ class DiaryListActivity : AppCompatActivity(), DiaryListener {
             R.id.item_toggle_theme -> {
                 toggleTheme()
             }
+            R.id.item_delete_all -> {
+                AlertDialog.Builder(this)
+                    .setTitle("Delete All Entries")
+                    .setMessage("Are you sure you want to delete ALL diary entries?")
+                    .setPositiveButton("Delete") { _, _ ->
+                        app.diaries.deleteAll()
+                        adapter.updateDiaryEnts(app.diaries.findAll())
+                        binding.editText.text.clear()
+                    }
+                    .setNegativeButton("Cancel", null)
+                    .show()
+            }
+
+
         }
         return super.onOptionsItemSelected(item)
     }

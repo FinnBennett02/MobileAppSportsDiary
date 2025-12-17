@@ -20,4 +20,10 @@
         android:icon="@drawable/ic_dark_mode"
         app:showAsAction="always" />
 
+    <item
+        android:id="@+id/item_delete_all"
+        android:title="Delete All"
+        app:showAsAction="never" />
+
+
 </menu>
