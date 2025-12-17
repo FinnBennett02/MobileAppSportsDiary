@@ -17,6 +17,7 @@ import com.example.newassignment.main.MainApp
 import com.example.newassignment.models.DiaryModel
 import com.example.newassignment.models.DiaryStorage
 
+
 class DiaryListActivity : AppCompatActivity(), DiaryListener {
 
     lateinit var app: MainApp
@@ -65,9 +66,14 @@ class DiaryListActivity : AppCompatActivity(), DiaryListener {
                 val launcherIntent = Intent(this, DiaryActivity::class.java)
                 getResult.launch(launcherIntent)
             }
+            R.id.item_map -> {
+                val launcherIntent = Intent(this, DiaryMapsActivity::class.java)
+                mapIntentLauncher.launch(launcherIntent)
+            }
         }
         return super.onOptionsItemSelected(item)
     }
+
 
     private val getResult =
         registerForActivityResult(
@@ -95,4 +101,9 @@ class DiaryListActivity : AppCompatActivity(), DiaryListener {
                 binding.editText.text.clear()
             }
         }
+
+    private val mapIntentLauncher =
+        registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()
+        )    { }
 }
