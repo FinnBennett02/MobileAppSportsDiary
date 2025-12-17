@@ -26,6 +26,11 @@ class DiaryMapsActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListener {
         binding = ActivityDiaryMapsBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        binding.toolbar.setNavigationOnClickListener {
+            finish()
+        }
+
         app = application as MainApp
 
         contentBinding = ContentDiaryMapsBinding.bind(binding.root)

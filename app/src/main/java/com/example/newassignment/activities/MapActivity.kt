@@ -30,6 +30,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback,  GoogleMap.OnMarker
         super.onCreate(savedInstanceState)
         binding = ActivityMapsBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         //location = intent.extras?.getParcelable("location",Location::class.java)!!
         location = intent.extras?.getParcelable<Location>("location")!!
         val mapFragment = supportFragmentManager
