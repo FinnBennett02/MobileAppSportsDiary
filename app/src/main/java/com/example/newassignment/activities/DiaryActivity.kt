@@ -7,6 +7,7 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.IntentCompat
 import com.example.newassignment.R
@@ -94,13 +95,21 @@ class DiaryActivity : AppCompatActivity() {
                 finish()
             }
         }
+        binding.btnDelete.setOnClickListener { view ->
 
-        binding.btnDelete.setOnClickListener {
-            app.diaries.delete(diary.id.toString())
-            Snackbar.make(it, R.string.delete_diary, Snackbar.LENGTH_LONG).show()
-            setResult(RESULT_OK)
-            finish()
+            AlertDialog.Builder(this)
+                .setTitle("Delete Entry")
+                .setMessage("Are you sure you want to delete this diary entry?")
+                .setPositiveButton("Delete") { _, _ ->
+                    app.diaries.delete(diary.id.toString())
+                    Snackbar.make(view, R.string.delete_diary, Snackbar.LENGTH_LONG).show()
+                    setResult(RESULT_OK)
+                    finish()
+                }
+                .setNegativeButton("Cancel", null)
+                .show()
         }
+
 
         binding.placemarkLocation.setOnClickListener {
             val location = Location(52.245696, -7.139102, 15f)
@@ -125,15 +134,23 @@ class DiaryActivity : AppCompatActivity() {
                 if (result.resultCode == RESULT_OK) {
                     val imageUri = result.data?.data
                     if (imageUri != null) {
-                        diary.image = imageUri.toString()  // store as String
+
+                        // Persist permission safely
+                        contentResolver.takePersistableUriPermission(
+                            imageUri,   // now non-null
+                            Intent.FLAG_GRANT_READ_URI_PERMISSION
+                        )
+
+                        diary.image = imageUri.toString()
+
                         Picasso.get()
-                            .load(imageUri)  // Picasso can load Uri
+                            .load(imageUri)
                             .into(binding.diaryImage)
-                        i("Image selected: $imageUri")
                     }
                 }
             }
     }
+
 
 
     private fun registerMapCallback() {
